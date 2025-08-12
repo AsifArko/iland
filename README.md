@@ -101,9 +101,6 @@ DOWNLOAD_SECRET_KEY=your_secure_random_string_here_minimum_32_characters
    ```bash
    # Install Sanity CLI globally
    npm install -g @sanity/cli
-
-   # Create new Sanity project
-   npm create sanity@latest -- --project <project-id> --dataset production --template clean
    ```
 
 2. **Login and Configure**:
@@ -121,7 +118,7 @@ DOWNLOAD_SECRET_KEY=your_secure_random_string_here_minimum_32_characters
 4. **Generate Types and Deploy**:
    ```bash
    npm run typegen
-   sanity deploy
+   npx sanity schema deploy
    ```
 
 ### Step 4: Stripe Configuration
@@ -325,5 +322,3 @@ For support and questions:
 - [ ] Advanced security features
 
 ---
-
-Built with ❤️ for solo software engineers who want to sell their code securely and efficiently.

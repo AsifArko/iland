@@ -82,19 +82,19 @@ jobs:
     steps:
       - name: Check production site health
         run: |
-          curl -f https://fermi-land.vercel.app/api/health || exit 1
+          curl -f https://iland.vercel.app/api/health || exit 1
         continue-on-error: true
 
       - name: Check staging site health
         run: |
-          curl -f https://fermi-land-staging.vercel.app/api/health || exit 1
+          curl -f https://iland-staging.vercel.app/api/health || exit 1
         continue-on-error: true
 
       - name: Check API endpoints
         run: |
           # Test critical API endpoints
-          curl -f https://fermi-land.vercel.app/api/contact || echo "Contact API failed"
-          curl -f https://fermi-land.vercel.app/api/get-price || echo "Price API failed"
+          curl -f https://iland.vercel.app/api/contact || echo "Contact API failed"
+          curl -f https://iland.vercel.app/api/get-price || echo "Price API failed"
         continue-on-error: true
 
   uptime-monitoring:
@@ -105,7 +105,7 @@ jobs:
       - name: Check site availability
         run: |
           # Check main site
-          response=$(curl -s -o /dev/null -w "%{http_code}" https://fermi-land.vercel.app)
+          response=$(curl -s -o /dev/null -w "%{http_code}" https://iland.vercel.app)
           if [ "$response" != "200" ]; then
             echo "❌ Main site returned status $response"
             exit 1
@@ -114,7 +114,7 @@ jobs:
           fi
 
           # Check API health
-          api_response=$(curl -s -o /dev/null -w "%{http_code}" https://fermi-land.vercel.app/api/health)
+          api_response=$(curl -s -o /dev/null -w "%{http_code}" https://iland.vercel.app/api/health)
           if [ "$api_response" != "200" ]; then
             echo "❌ API returned status $api_response"
             exit 1

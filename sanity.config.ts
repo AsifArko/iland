@@ -5,7 +5,7 @@ import { structure } from "./src/sanity/structure";
 
 export default defineConfig({
   name: "default",
-  title: "Fermi Land",
+  title: "iland",
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "your-project-id",
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
   basePath: "/studio",

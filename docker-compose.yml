@@ -1,12 +1,12 @@
 version: "3.8"
 
 services:
-  fermi-app:
+  iland-app:
     build:
       context: .
       dockerfile: Dockerfile
       target: runner
-    container_name: fermi-land
+    container_name: iland
     ports:
       - "3000:3000"
     environment:
@@ -38,15 +38,15 @@ services:
       retries: 3
       start_period: 40s
     networks:
-      - fermi-network
+      - iland-network
 
   # Development service (optional)
-  fermi-dev:
+  iland-dev:
     build:
       context: .
       dockerfile: Dockerfile
       target: builder
-    container_name: fermi-land-dev
+    container_name: iland-dev
     ports:
       - "3001:3000"
     environment:
@@ -78,10 +78,10 @@ services:
     profiles:
       - dev
     networks:
-      - fermi-network
+      - iland-network
 
 networks:
-  fermi-network:
+  iland-network:
     driver: bridge
 
 volumes:

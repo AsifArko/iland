@@ -1,11 +1,11 @@
 version: "3.8"
 
 services:
-  fermi-dev:
+  iland-dev:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    container_name: fermi-land-dev
+    container_name: iland-dev
     ports:
       - "3000:3000"
     environment:
@@ -36,8 +36,8 @@ services:
     command: npm run dev
     restart: unless-stopped
     networks:
-      - fermi-dev-network
+      - iland-dev-network
 
 networks:
-  fermi-dev-network:
+  iland-dev-network:
     driver: bridge

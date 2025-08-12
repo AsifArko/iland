@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Platform-neutral build script for Fermi Land
+# Platform-neutral build script for iland
 # This script ensures consistent builds across different operating systems
 
 set -e

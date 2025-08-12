@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Sparkles } from "lucide-react";
-import { CSAnimation } from "@/components/animations";
+import { ILandAnimation } from "@/components/animations";
 import { CheckoutModal } from "@/components/checkout-modal";
 import Link from "next/link";
 import { useState } from "react";
@@ -63,7 +63,7 @@ export function Hero() {
 
         <div className="flex justify-center lg:justify-end">
           <div className="w-full max-w-md h-64 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-lg border border-border/50 flex items-center justify-center">
-            <CSAnimation size="lg" className="w-48 h-48" />
+            <ILandAnimation size="lg" className="w-48 h-48" />
           </div>
         </div>
       </div>

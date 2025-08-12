@@ -139,7 +139,7 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: "fermi-land:latest"
+          image-ref: "iland:latest"
           format: "sarif"
           output: "trivy-results.sarif"
 

@@ -1,6 +1,6 @@
 # Scripts
 
-This directory contains utility scripts for the Fermi project.
+This directory contains utility scripts for the iland project.
 
 ## update-orders.js
 

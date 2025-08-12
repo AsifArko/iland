@@ -1,4 +1,4 @@
-export { CSAnimation } from "./cs-animation";
+export { ILandAnimation } from "./iland-animation";
 export { EngineeringAnimation } from "./engineering-animation";
 export { SupportAnimation } from "./support-animation";
 export { FeaturesAnimation } from "./features-animation";

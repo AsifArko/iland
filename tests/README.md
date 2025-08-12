@@ -1,6 +1,6 @@
 # Testing Infrastructure
 
-This directory contains the comprehensive testing setup for the Fermi Land project, designed to achieve 100% test coverage across all functions, classes, and UI components.
+This directory contains the comprehensive testing setup for the iland project, designed to achieve 100% test coverage across all functions, classes, and UI components.
 
 ## Architecture
 

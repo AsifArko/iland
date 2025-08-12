@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  fermi-app:
+  iland-app:
     environment:
       # Additional environment variables can be set here
       # These will override the base configuration
@@ -12,7 +12,7 @@ services:
       - .env.local
       - .env.production # Optional production-specific env file
 
-  fermi-dev:
+  iland-dev:
     environment:
       # Development-specific environment variables
       - PORT=3000

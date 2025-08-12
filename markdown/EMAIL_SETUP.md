@@ -1,10 +1,10 @@
-# Email Setup for Fermi
+# Email Setup for iland
 
-This document explains how the email functionality works in the Fermi application and how to set it up.
+This document explains how the email functionality works in the iland application and how to set it up.
 
 ## Overview
 
-The Fermi application sends emails to customers after successful payments. There are two types of emails sent:
+The iland application sends emails to customers after successful payments. There are two types of emails sent:
 
 1. **Order Confirmation Email** - Sent immediately after payment confirmation
 2. **Download Email** - Sent with the download link to the success page
@@ -38,17 +38,17 @@ SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
 SMTP_USER=your_email@gmail.com
 SMTP_PASS=your_app_password_here
-CONTACT_EMAIL=noreply@fermi.com
+CONTACT_EMAIL=noreply@iland.com
 ```
 
 ## Email Provider Options
 
 ### Option 1: Gmail with Google Workspace (Recommended for Custom Domains)
 
-**For professional emails like `noreply@fermi.com`:**
+**For professional emails like `noreply@iland.com`:**
 
-1. Set up Google Workspace for your domain (fermi.com)
-2. Create the email address `noreply@fermi.com` in Google Workspace
+1. Set up Google Workspace for your domain (iland.com)
+2. Create the email address `noreply@iland.com` in Google Workspace
 3. Enable 2-Factor Authentication on the Google Workspace account
 4. Generate an App Password:
    - Go to Google Account settings
@@ -58,9 +58,9 @@ CONTACT_EMAIL=noreply@fermi.com
    ```bash
    SMTP_HOST=smtp.gmail.com
    SMTP_PORT=587
-   SMTP_USER=noreply@fermi.com
+   SMTP_USER=noreply@iland.com
    SMTP_PASS=your_app_password_here
-   CONTACT_EMAIL=noreply@fermi.com
+   CONTACT_EMAIL=noreply@iland.com
    ```
 
 **Note:** Regular Gmail accounts cannot send from custom domain addresses.
@@ -69,28 +69,28 @@ CONTACT_EMAIL=noreply@fermi.com
 
 1. Sign up at [sendgrid.com](https://sendgrid.com)
 2. Create an API key with "Mail Send" permissions
-3. Verify your domain (fermi.com) in SendGrid
+3. Verify your domain (iland.com) in SendGrid
 4. Use these settings:
    ```bash
    SMTP_HOST=smtp.sendgrid.net
    SMTP_PORT=587
    SMTP_USER=apikey
    SMTP_PASS=your_sendgrid_api_key_here
-   CONTACT_EMAIL=noreply@fermi.com
+   CONTACT_EMAIL=noreply@iland.com
    ```
 
 ### Option 3: Resend (Modern Email Service)
 
 1. Sign up at [resend.com](https://resend.com)
 2. Create an API key
-3. Verify your domain (fermi.com) in Resend
+3. Verify your domain (iland.com) in Resend
 4. Use these settings:
    ```bash
    SMTP_HOST=smtp.resend.com
    SMTP_PORT=587
    SMTP_USER=resend
    SMTP_PASS=your_resend_api_key_here
-   CONTACT_EMAIL=noreply@fermi.com
+   CONTACT_EMAIL=noreply@iland.com
    ```
 
 ### Option 4: Other Providers

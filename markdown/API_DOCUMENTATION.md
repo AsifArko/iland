@@ -1,8 +1,8 @@
-# Fermi API Documentation
+# iland API Documentation
 
 ## Overview
 
-The Fermi API provides endpoints for secure source code sales, digital downloads, order management, and user interactions. All endpoints are RESTful and return JSON responses.
+The iland API provides endpoints for secure source code sales, digital downloads, order management, and user interactions. All endpoints are RESTful and return JSON responses.
 
 ## Base URL
 
@@ -558,7 +558,7 @@ npm run bundle:analyze
 ### JavaScript/TypeScript
 
 ```typescript
-class FermiAPI {
+class ilandAPI {
   private baseUrl: string;
 
   constructor(baseUrl: string = "https://yourdomain.com/api") {
@@ -610,7 +610,7 @@ class FermiAPI {
 ```python
 import requests
 
-class FermiAPI:
+class ilandAPI:
     def __init__(self, base_url="https://yourdomain.com/api"):
         self.base_url = base_url
 
@@ -670,7 +670,7 @@ class FermiAPI:
 
 For API support and questions:
 
-- **Email**: api-support@fermi.com
-- **Documentation**: https://docs.fermi.com/api
-- **Status Page**: https://status.fermi.com
-- **Performance Monitoring**: https://monitoring.fermi.com
+- **Email**: api-support@iland.com
+- **Documentation**: https://docs.iland.com/api
+- **Status Page**: https://status.iland.com
+- **Performance Monitoring**: https://monitoring.iland.com

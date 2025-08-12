@@ -1,6 +1,6 @@
-# Contributing to Fermi
+# Contributing to iland
 
-Thank you for your interest in contributing to Fermi! This document provides guidelines and information for contributors.
+Thank you for your interest in contributing to iland! This document provides guidelines and information for contributors.
 
 ## Table of Contents
 
@@ -35,12 +35,12 @@ Before contributing, ensure you have:
 1. **Fork the repository** on GitHub
 2. **Clone your fork** locally:
    ```bash
-   git clone https://github.com/your-username/fermi-land.git
-   cd fermi-land
+   git clone https://github.com/your-username/iland.git
+   cd iland
    ```
 3. **Add upstream remote**:
    ```bash
-   git remote add upstream https://github.com/original-owner/fermi-land.git
+   git remote add upstream https://github.com/original-owner/iland.git
    ```
 
 ## Development Setup
@@ -384,7 +384,7 @@ We follow **Semantic Versioning** (SemVer):
 
 - **GitHub Issues** for bug reports and feature requests
 - **GitHub Discussions** for questions and ideas
-- **Email** for security issues: security@fermi.com
+- **Email** for security issues: security@iland.com
 
 ### Communication Channels
 
@@ -408,4 +408,4 @@ Contributors will be recognized in:
 - **GitHub contributors** page
 - **Project documentation**
 
-Thank you for contributing to Fermi! 🚀
+Thank you for contributing to iland! 🚀

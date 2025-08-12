@@ -2,7 +2,7 @@
 
 ## Problem
 
-Your Fermi application is trying to download from a private GitHub repository, which requires authentication. Without proper GitHub authentication, users get "Not Found" errors when trying to download.
+Your iland application is trying to download from a private GitHub repository, which requires authentication. Without proper GitHub authentication, users get "Not Found" errors when trying to download.
 
 ## Solution
 
@@ -14,7 +14,7 @@ Set up a GitHub Personal Access Token to enable authenticated downloads from pri
 
 1. Go to [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens)
 2. Click "Generate new token (classic)"
-3. Give it a descriptive name like "Fermi Download Access"
+3. Give it a descriptive name like "iland Download Access"
 4. Set expiration (recommended: 90 days or custom)
 5. Select the following scopes:
    - `repo` (Full control of private repositories)

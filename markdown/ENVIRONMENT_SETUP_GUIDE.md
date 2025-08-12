@@ -1,11 +1,11 @@
-# Environment Setup Guide for Fermi
+# Environment Setup Guide for iland
 
 ## Current File Structure
 
 You currently have these environment files:
 
 ```
-fermi-land/
+iland/
 ├── .env                    # Base environment (Docker/production)
 ├── .env.local             # Local development (Next.js)
 ├── env.example            # Template with all variables (no dot prefix)
@@ -129,7 +129,7 @@ SMTP_HOST=smtp.gmail.com                         # Email provider host
 SMTP_PORT=587                                    # Email provider port
 SMTP_USER=your_email@gmail.com                   # Email username
 SMTP_PASS=your_app_password                      # Email password
-CONTACT_EMAIL=noreply@fermi.com                  # Contact email address
+CONTACT_EMAIL=noreply@iland.com                  # Contact email address
 ```
 
 #### Security

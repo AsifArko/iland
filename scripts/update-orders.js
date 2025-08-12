@@ -48,7 +48,7 @@ async function updateOrders() {
             amount: order.amount || 0,
             currency: order.currency || "usd",
             status: order.status || "completed",
-            product: order.product || "fermi_source_code",
+            product: order.product || "iland_source_code",
             createdAt: order.createdAt || new Date().toISOString(),
             updatedAt: new Date().toISOString(),
           })

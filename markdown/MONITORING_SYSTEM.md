@@ -1,6 +1,6 @@
 # Custom Monitoring & Analytics System
 
-This document describes the comprehensive custom monitoring and analytics system built for the fermi-land project, providing complete visibility into system performance, user behavior, and traffic patterns without relying on third-party services.
+This document describes the comprehensive custom monitoring and analytics system built for the iland project, providing complete visibility into system performance, user behavior, and traffic patterns without relying on third-party services.
 
 ## Overview
 

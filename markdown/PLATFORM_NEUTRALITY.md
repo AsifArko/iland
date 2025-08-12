@@ -1,6 +1,6 @@
 # Platform Neutrality Guide
 
-This document explains how Fermi Land has been configured to be platform-neutral, ensuring consistent builds and deployments across different operating systems (macOS, Windows, Linux) while preserving the UI experience.
+This document explains how iland has been configured to be platform-neutral, ensuring consistent builds and deployments across different operating systems (macOS, Windows, Linux) while preserving the UI experience.
 
 ## Overview
 
@@ -143,8 +143,8 @@ npm run build:platform-neutral
 
 ```bash
 # Test with Docker (platform-neutral)
-docker build -t fermi-land .
-docker run -p 3000:3000 fermi-land
+docker build -t iland .
+docker run -p 3000:3000 iland
 ```
 
 ## Troubleshooting
@@ -224,4 +224,4 @@ If you encounter platform-specific issues:
 - **Stable Foundation**: Using Tailwind CSS v3.4.17 provides a stable, well-tested foundation
 - **Future-Proof**: The configuration is ready for future Tailwind CSS v4 migration when it's more stable
 
-The platform-neutral configuration ensures that Fermi Land can be developed and deployed from any operating system without platform-specific issues, while preserving your existing UI experience.
+The platform-neutral configuration ensures that iland can be developed and deployed from any operating system without platform-specific issues, while preserving your existing UI experience.

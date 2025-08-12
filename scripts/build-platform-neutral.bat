@@ -1,5 +1,5 @@
 @echo off
-REM Platform-neutral build script for Fermi Land (Windows)
+REM Platform-neutral build script for iland (Windows)
 REM This script ensures consistent builds across different operating systems
 
 echo 🚀 Starting platform-neutral build...

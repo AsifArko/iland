@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Fermi Docker Setup Script
-# This script helps you quickly set up and run Fermi with Docker
+# iland Docker Setup Script
+# This script helps you quickly set up and run iland with Docker
 
 set -e
 
-echo "🐳 Fermi Docker Setup"
+echo "🐳 iland Docker Setup"
 echo "====================="
 
 # Check if Docker is installed

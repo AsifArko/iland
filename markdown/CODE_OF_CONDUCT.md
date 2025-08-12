@@ -60,7 +60,7 @@ representative at an online or offline event.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported to the community leaders responsible for enforcement at
-conduct@fermi.com. All complaints will be reviewed and investigated promptly and
+conduct@iland.com. All complaints will be reviewed and investigated promptly and
 fairly.
 
 All community leaders are obligated to respect the privacy and security of the
@@ -115,7 +115,7 @@ community.
 ## Reporting Guidelines
 
 If you believe someone is violating the Code of Conduct, we ask that you report
-it by emailing conduct@fermi.com. All reports will be kept confidential. In some
+it by emailing conduct@iland.com. All reports will be kept confidential. In some
 cases we may determine that a public statement will need to be made. If that's
 the case, the identities of all victims and reporters will remain confidential
 unless those individuals instruct us otherwise.
@@ -137,7 +137,7 @@ respond as appropriate.
 
 ## Contact Information
 
-- **Email**: conduct@fermi.com
+- **Email**: conduct@iland.com
 - **Project Maintainers**: [List of maintainers]
 - **Community Leaders**: [List of community leaders]
 

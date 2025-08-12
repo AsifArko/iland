@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Environment Variable Check Script for Fermi Docker
+# Environment Variable Check Script for iland Docker
 # This script helps verify that all required environment variables are properly set
 
 set -e
 
-echo "🔍 Fermi Environment Variable Check"
+echo "🔍 iland Environment Variable Check"
 echo "==================================="
 
 # Colors for output
@@ -129,8 +129,8 @@ if docker info &> /dev/null; then
     echo -e "${GREEN}✅ Docker is running${NC}"
     
     # Check if containers are running
-    if docker ps | grep -q "fermi-land"; then
-        echo -e "${GREEN}✅ Fermi container is running${NC}"
+    if docker ps | grep -q "iland"; then
+  echo -e "${GREEN}✅ iland container is running${NC}"
         
         # Check environment variables in container
         echo ""
@@ -140,14 +140,14 @@ if docker info &> /dev/null; then
         # Check a few key variables in the container
         container_vars=("STRIPE_SECRET_KEY" "SANITY_API_TOKEN" "SMTP_HOST")
         for var in "${container_vars[@]}"; do
-            if docker exec fermi-land printenv "$var" &> /dev/null; then
+            if docker exec iland printenv "$var" &> /dev/null; then
                 echo -e "${GREEN}✅ $var is set in container${NC}"
             else
                 echo -e "${RED}❌ $var is not set in container${NC}"
             fi
         done
     else
-        echo -e "${YELLOW}⚠️  Fermi container is not running${NC}"
+        echo -e "${YELLOW}⚠️  iland container is not running${NC}"
         echo "Run 'docker-compose up --build' to start the container"
     fi
 else

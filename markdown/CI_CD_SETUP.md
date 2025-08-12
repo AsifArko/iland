@@ -1,6 +1,6 @@
 # CI/CD Pipeline Setup Guide
 
-This document provides a comprehensive guide to the CI/CD pipeline implementation for the Fermi project.
+This document provides a comprehensive guide to the CI/CD pipeline implementation for the iland project.
 
 ## Overview
 
