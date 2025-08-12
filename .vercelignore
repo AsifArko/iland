@@ -1,0 +1,32 @@
+# Husky Git hooks (not needed in production)
+.husky/
+
+# Development files
+*.log
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Test files
+tests/
+coverage/
+*.test.js
+*.test.ts
+*.test.jsx
+*.test.tsx
+
+# Build artifacts
+.next/
+out/
+dist/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  fermi-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: fermi-land-dev
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - NEXT_TELEMETRY_DISABLED=1
+      # Pass through all environment variables from host
+      - STRIPE_SECRET_KEY
+      - NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+      - NEXT_PUBLIC_STRIPE_PRICE_ID
+      - STRIPE_WEBHOOK_SECRET
+      - NEXT_PUBLIC_SANITY_PROJECT_ID
+      - NEXT_PUBLIC_SANITY_DATASET
+      - SANITY_API_TOKEN
+      - GITHUB_PERSONAL_ACCESS_TOKEN
+      - NEXT_PUBLIC_BASE_URL
+      - SMTP_HOST
+      - SMTP_PORT
+      - SMTP_USER
+      - SMTP_PASS
+      - CONTACT_EMAIL
+      - DOWNLOAD_SECRET_KEY
+    env_file:
+      - .env.local
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    command: npm run dev
+    restart: unless-stopped
+    networks:
+      - fermi-dev-network
+
+networks:
+  fermi-dev-network:
+    driver: bridge
