@@ -1,0 +1,399 @@
+import { NextRequest } from "next/server";
+import { POST } from "@/app/api/contact/route";
+import { sendContactEmail } from "@/lib/email";
+import { ValidationError } from "@/lib/errors";
+
+describe("Contact API Integration", () => {
+  const mockSendContactEmail = sendContactEmail as jest.MockedFunction<
+    typeof sendContactEmail
+  >;
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  describe("POST /api/contact", () => {
+    it("should successfully send contact email with valid data", async () => {
+      const validData = {
+        name: "John Doe",
+        email: "john@example.com",
+        subject: "Test Subject",
+        message: "This is a test message",
+      };
+
+      mockSendContactEmail.mockResolvedValueOnce(true);
+
+      const request = new NextRequest("http://localhost:3000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(validData),
+      });
+
+      const response = await POST(request);
+      const responseData = await response.json();
+
+      expect(response.status).toBe(200);
+      expect(responseData).toEqual({
+        success: true,
+        message: "Contact form submitted successfully",
+      });
+
+      expect(mockSendContactEmail).toHaveBeenCalledWith(
+        validData.name,
+        validData.email,
+        validData.subject,
+        validData.message
+      );
+    });
+
+    it("should return 400 for missing required fields", async () => {
+      const invalidData = {
+        name: "John Doe",
+        // Missing email, subject, and message
+      };
+
+      const request = new NextRequest("http://localhost:3000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(invalidData),
+      });
+
+      const response = await POST(request);
+      const responseData = await response.json();
+
+      expect(response.status).toBe(400);
+      expect(responseData.success).toBe(false);
+      expect(responseData.error.code).toBe("VALIDATION_ERROR");
+      expect(responseData.error.message).toContain("Missing required fields");
+    });
+
+    it("should return 400 for invalid email format", async () => {
+      const invalidData = {
+        name: "John Doe",
+        email: "invalid-email",
+        subject: "Test Subject",
+        message: "This is a test message",
+      };
+
+      const request = new NextRequest("http://localhost:3000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(invalidData),
+      });
+
+      const response = await POST(request);
+      const responseData = await response.json();
+
+      expect(response.status).toBe(400);
+      expect(responseData.success).toBe(false);
+      expect(responseData.error.code).toBe("VALIDATION_ERROR");
+      expect(responseData.error.message).toContain("Invalid email format");
+    });
+
+    it("should return 400 for empty message", async () => {
+      const invalidData = {
+        name: "John Doe",
+        email: "john@example.com",
+        subject: "Test Subject",
+        message: "", // Empty message
+      };
+
+      const request = new NextRequest("http://localhost:3000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(invalidData),
+      });
+
+      const response = await POST(request);
+      const responseData = await response.json();
+
+      expect(response.status).toBe(400);
+      expect(responseData.success).toBe(false);
+      expect(responseData.error.code).toBe("VALIDATION_ERROR");
+      expect(responseData.error.message).toContain("Message cannot be empty");
+    });
+
+    it("should return 400 for message that is too short", async () => {
+      const invalidData = {
+        name: "John Doe",
+        email: "john@example.com",
+        subject: "Test Subject",
+        message: "Hi", // Too short
+      };
+
+      const request = new NextRequest("http://localhost:3000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(invalidData),
+      });
+
+      const response = await POST(request);
+      const responseData = await response.json();
+
+      expect(response.status).toBe(400);
+      expect(responseData.success).toBe(false);
+      expect(responseData.error.code).toBe("VALIDATION_ERROR");
+      expect(responseData.error.message).toContain(
+        "Message must be at least 10 characters"
+      );
+    });
+
+    it("should return 400 for message that is too long", async () => {
+      const invalidData = {
+        name: "John Doe",
+        email: "john@example.com",
+        subject: "Test Subject",
+        message: "A".repeat(1001), // Too long
+      };
+
+      const request = new NextRequest("http://localhost:3000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(invalidData),
+      });
+
+      const response = await POST(request);
+      const responseData = await response.json();
+
+      expect(response.status).toBe(400);
+      expect(responseData.success).toBe(false);
+      expect(responseData.error.code).toBe("VALIDATION_ERROR");
+      expect(responseData.error.message).toContain(
+        "Message must be less than 1000 characters"
+      );
+    });
+
+    it("should return 500 when email service fails", async () => {
+      const validData = {
+        name: "John Doe",
+        email: "john@example.com",
+        subject: "Test Subject",
+        message: "This is a test message",
+      };
+
+      mockSendContactEmail.mockRejectedValueOnce(
+        new Error("Email service failed")
+      );
+
+      const request = new NextRequest("http://localhost:3000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(validData),
+      });
+
+      const response = await POST(request);
+      const responseData = await response.json();
+
+      expect(response.status).toBe(500);
+      expect(responseData.success).toBe(false);
+      expect(responseData.error.code).toBe("EMAIL_SERVICE_ERROR");
+      expect(responseData.error.message).toContain(
+        "Failed to send contact email"
+      );
+    });
+
+    it("should return 400 for invalid JSON body", async () => {
+      const request = new NextRequest("http://localhost:3000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: "invalid-json",
+      });
+
+      const response = await POST(request);
+      const responseData = await response.json();
+
+      expect(response.status).toBe(400);
+      expect(responseData.success).toBe(false);
+      expect(responseData.error.code).toBe("VALIDATION_ERROR");
+      expect(responseData.error.message).toContain("Invalid JSON body");
+    });
+
+    it("should return 405 for non-POST requests", async () => {
+      const request = new NextRequest("http://localhost:3000/api/contact", {
+        method: "GET",
+      });
+
+      const response = await POST(request);
+
+      expect(response.status).toBe(405);
+    });
+
+    it("should handle rate limiting", async () => {
+      const validData = {
+        name: "John Doe",
+        email: "john@example.com",
+        subject: "Test Subject",
+        message: "This is a test message",
+      };
+
+      // Mock rate limiting by throwing a specific error
+      mockSendContactEmail.mockRejectedValueOnce(
+        new Error("Rate limit exceeded")
+      );
+
+      const request = new NextRequest("http://localhost:3000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(validData),
+      });
+
+      const response = await POST(request);
+      const responseData = await response.json();
+
+      expect(response.status).toBe(429);
+      expect(responseData.success).toBe(false);
+      expect(responseData.error.code).toBe("RATE_LIMIT_ERROR");
+    });
+
+    it("should sanitize input data", async () => {
+      const dataWithScript = {
+        name: '<script>alert("xss")</script>John Doe',
+        email: "john@example.com",
+        subject: 'Test Subject<script>alert("xss")</script>',
+        message: 'This is a test message<script>alert("xss")</script>',
+      };
+
+      mockSendContactEmail.mockResolvedValueOnce(true);
+
+      const request = new NextRequest("http://localhost:3000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataWithScript),
+      });
+
+      const response = await POST(request);
+      const responseData = await response.json();
+
+      expect(response.status).toBe(200);
+      expect(responseData.success).toBe(true);
+
+      // Verify that the email service was called with sanitized data
+      expect(mockSendContactEmail).toHaveBeenCalledWith(
+        "John Doe", // Script tags should be removed
+        "john@example.com",
+        "Test Subject", // Script tags should be removed
+        "This is a test message" // Script tags should be removed
+      );
+    });
+
+    it("should handle concurrent requests", async () => {
+      const validData = {
+        name: "John Doe",
+        email: "john@example.com",
+        subject: "Test Subject",
+        message: "This is a test message",
+      };
+
+      mockSendContactEmail.mockResolvedValue(true);
+
+      const request1 = new NextRequest("http://localhost:3000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(validData),
+      });
+
+      const request2 = new NextRequest("http://localhost:3000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(validData),
+      });
+
+      // Send concurrent requests
+      const [response1, response2] = await Promise.all([
+        POST(request1),
+        POST(request2),
+      ]);
+
+      const [data1, data2] = await Promise.all([
+        response1.json(),
+        response2.json(),
+      ]);
+
+      expect(response1.status).toBe(200);
+      expect(response2.status).toBe(200);
+      expect(data1.success).toBe(true);
+      expect(data2.success).toBe(true);
+
+      expect(mockSendContactEmail).toHaveBeenCalledTimes(2);
+    });
+
+    it("should include request ID in error responses", async () => {
+      const invalidData = {
+        name: "John Doe",
+        // Missing required fields
+      };
+
+      const request = new NextRequest("http://localhost:3000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(invalidData),
+      });
+
+      const response = await POST(request);
+      const responseData = await response.json();
+
+      expect(response.status).toBe(400);
+      expect(responseData.success).toBe(false);
+      expect(responseData.error.requestId).toBeDefined();
+      expect(typeof responseData.error.requestId).toBe("string");
+    });
+
+    it("should handle email service timeout", async () => {
+      const validData = {
+        name: "John Doe",
+        email: "john@example.com",
+        subject: "Test Subject",
+        message: "This is a test message",
+      };
+
+      // Mock timeout
+      mockSendContactEmail.mockImplementation(
+        () =>
+          new Promise((_, reject) =>
+            setTimeout(() => reject(new Error("Timeout")), 100)
+          )
+      );
+
+      const request = new NextRequest("http://localhost:3000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(validData),
+      });
+
+      const response = await POST(request);
+      const responseData = await response.json();
+
+      expect(response.status).toBe(500);
+      expect(responseData.success).toBe(false);
+      expect(responseData.error.code).toBe("EMAIL_SERVICE_ERROR");
+    });
+  });
+});

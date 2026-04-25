@@ -1,0 +1,89 @@
+version: "3.8"
+
+services:
+  iland-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runner
+    container_name: iland
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+      # Pass through all environment variables from host
+      - STRIPE_SECRET_KEY
+      - NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+      - NEXT_PUBLIC_STRIPE_PRICE_ID
+      - STRIPE_WEBHOOK_SECRET
+      - NEXT_PUBLIC_SANITY_PROJECT_ID
+      - NEXT_PUBLIC_SANITY_DATASET
+      - SANITY_API_TOKEN
+      - GITHUB_PERSONAL_ACCESS_TOKEN
+      - NEXT_PUBLIC_BASE_URL
+      - SMTP_HOST
+      - SMTP_PORT
+      - SMTP_USER
+      - SMTP_PASS
+      - CONTACT_EMAIL
+      - DOWNLOAD_SECRET_KEY
+    env_file:
+      - .env.local
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - iland-network
+
+  # Development service (optional)
+  iland-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
+    container_name: iland-dev
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=development
+      - NEXT_TELEMETRY_DISABLED=1
+      # Pass through all environment variables from host
+      - STRIPE_SECRET_KEY
+      - NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+      - NEXT_PUBLIC_STRIPE_PRICE_ID
+      - STRIPE_WEBHOOK_SECRET
+      - NEXT_PUBLIC_SANITY_PROJECT_ID
+      - NEXT_PUBLIC_SANITY_DATASET
+      - SANITY_API_TOKEN
+      - GITHUB_PERSONAL_ACCESS_TOKEN
+      - NEXT_PUBLIC_BASE_URL
+      - SMTP_HOST
+      - SMTP_PORT
+      - SMTP_USER
+      - SMTP_PASS
+      - CONTACT_EMAIL
+      - DOWNLOAD_SECRET_KEY
+    env_file:
+      - .env.local
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    command: npm run dev
+    profiles:
+      - dev
+    networks:
+      - iland-network
+
+networks:
+  iland-network:
+    driver: bridge
+
+volumes:
+  node_modules:
+  next_cache:
