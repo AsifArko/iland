@@ -56,7 +56,7 @@
     "@radix-ui/react-tabs": "^1.1.12",
     "@sanity/client": "^7.8.1",
     "@sanity/image-url": "^1.1.0",
-    "@sanity/vision": "^3.99.0",
+    "@sanity/vision": "^5.23.0",
     "@stripe/stripe-js": "^7.6.1",
     "@types/nodemailer": "^6.4.17",
     "@vercel/speed-insights": "^1.2.0",
