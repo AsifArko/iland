@@ -95,7 +95,7 @@
     "husky": "^9.1.7",
     "image-webpack-loader": "^8.1.0",
     "jest": "^30.0.5",
-    "jest-environment-jsdom": "^30.0.5",
+    "jest-environment-jsdom": "^30.3.0",
     "lighthouse": "^11.6.0",
     "lint-staged": "^16.1.2",
     "postcss": "^8.4.49",
