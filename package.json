@@ -57,7 +57,7 @@
     "@sanity/client": "^7.8.1",
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^3.99.0",
-    "@stripe/stripe-js": "^7.6.1",
+    "@stripe/stripe-js": "^9.5.0",
     "@types/nodemailer": "^6.4.17",
     "@vercel/speed-insights": "^1.2.0",
     "class-variance-authority": "^0.7.1",
